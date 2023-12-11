@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import {useFetch} from './hooks/useFetch';
+
 
 type Repository = {
   full_name: string,
@@ -7,21 +7,14 @@ type Repository = {
 }
 
 function App() {
-  const [repositories, setRepositories] = useState<Repository[]>([]);
-  //GustaSilvaBr
-  useEffect(() => {
-    axios.get('https://api.github.com/users/GustaSilvaBr/repos')
-      .then(response=>{
-        setRepositories(response.data)
-      })
-  }, []);
-
+  const {data: repositories} = useFetch<Repository[]>('https://api.github.com/users/GustaSilvaBr/repos');
+  
   return (
     <div>
       <h1>Hello</h1>
       <ul>
         {
-          repositories.map((repo)=>{
+          repositories?.map((repo)=>{
             return (
               <li key={repo.full_name}>
                 <strong>{repo.full_name}</strong>
