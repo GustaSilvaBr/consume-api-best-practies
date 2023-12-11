@@ -7,7 +7,7 @@ type Repository = {
 }
 
 function App() {
-  const {data: repositories, isFetching, error} = useFetch<Repository[]>('https://api.github.com/users/GustaSilvaBr/repos');
+  const {data: repositories, isFetching, error} = useFetch<Repository[]>('users/GustaSilvaBr/repos');
 
   if(error){
     alert('error');
